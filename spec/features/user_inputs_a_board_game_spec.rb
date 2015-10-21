@@ -27,4 +27,18 @@ feature "Input a Board Game", %q(
     expect(page).to have_content("Board Game Created!")
   end
 
+  scenario 'user is given an error if they forget to enter the board game name' do
+    visit new_board_game_path
+
+    fill_in "Publisher", with: "Mayfair Games"
+    fill_in "Description", with: "Best Game Ever!"
+    select "2014", from: "board_game_release_date_1i"
+    select "December", from: "board_game_release_date_2i"
+    select "1", from: "board_game_release_date_3i"
+    click_on "Create Board Game"
+
+    save_and_open_page
+    expect(page).to have_content("Name can't be blank")
+  end
+
 end

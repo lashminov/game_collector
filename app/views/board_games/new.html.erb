@@ -1,4 +1,16 @@
 <%= form_for @board_game do |f| %>
+
+# <% if @board_game.errors.any? %>
+#   <h2>ERROR!</h2>
+#   <ul>
+#   <% board_game.errors.full_messages.each do |error_msg| %>
+#     <li>
+#       <%= error_msg %>
+#     </li>
+#   <% end %>
+#   </ul>
+# <% end %>
+
   <%= f.label :name %>
   <%= f.text_field :name %>
 
