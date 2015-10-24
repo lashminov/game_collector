@@ -8,6 +8,7 @@ feature "Input a Board Game", %q(
   Acceptance Criteria
   [ ] I must enter a name, publisher, description, and release_date
   [ ] If all fields are complete, I am told that my board game has been saved
+  [ ] Description must be a minimum of 50 characters
   [ ] If a field is incomplete, I am given an error message and brought back to the input form.
   [ ] If a board game already exists in the database, I am given an error message.
 
@@ -31,14 +32,21 @@ feature "Input a Board Game", %q(
     visit new_board_game_path
 
     fill_in "Publisher", with: "Mayfair Games"
-    fill_in "Description", with: "Best Game Ever!"
+    fill_in "Description", with: "Best Game Ever! xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     select "2014", from: "board_game_release_date_1i"
     select "December", from: "board_game_release_date_2i"
     select "1", from: "board_game_release_date_3i"
     click_on "Create Board Game"
 
-    save_and_open_page
-    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Board Game Created!")
   end
 
+  scenario "user is given an error if they forgot fields" do
+    visit new_board_game_path
+    click_on "Create Board Game"
+
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Publisher can't be blank")
+    expect(page).to have_content("Description is too short (minimum is 50 characters)")
+  end
 end

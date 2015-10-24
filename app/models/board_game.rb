@@ -1,3 +1,6 @@
 class BoardGame < ActiveRecord::Base
   validates :name, presence: true
+  validates :publisher, presence: true
+  validates :description, presence: true
+  validates :description, length: { minimum: 50 }
 end

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007155950) do
+ActiveRecord::Schema.define(version: 20151021134325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "board_games", force: :cascade do |t|
     t.string   "name",         null: false
-    t.string   "publisher"
+    t.string   "publisher",    null: false
     t.text     "description"
     t.date     "release_date"
     t.datetime "created_at",   null: false
