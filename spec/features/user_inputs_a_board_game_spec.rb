@@ -22,7 +22,7 @@ feature "Input a Board Game", %q(
 
     fill_in "Name", with: "Settlers of Catan"
     fill_in "Publisher", with: "Mayfair Games"
-    fill_in "Description", with: "Best Game Ever!"
+    fill_in "Description", with: "Best Game Ever!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     select "2014", from: "board_game_release_date_1i"
     select "December", from: "board_game_release_date_2i"
     select "1", from: "board_game_release_date_3i"
@@ -33,13 +33,13 @@ feature "Input a Board Game", %q(
 
   scenario 'user is given an error if they forget to enter the board game name' do
     fill_in "Publisher", with: "Mayfair Games"
-    fill_in "Description", with: "Best Game Ever! xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    fill_in "Description", with: "Best Game Ever! xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     select "2014", from: "board_game_release_date_1i"
     select "December", from: "board_game_release_date_2i"
     select "1", from: "board_game_release_date_3i"
     click_on "Create Board Game"
 
-    expect(page).to have_content("Board Game Created!")
+    expect(page).to have_content("Name can't be blank")
   end
 
   scenario "user is given an error if they forgot fields" do
